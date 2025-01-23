@@ -1,10 +1,11 @@
 .imagensdinamicas{
     
     top: 20%;
-    width: 25%;
-    height: 35%;
+    width: 75%;
+    height: auto;
     top: 30%;
     transition: transform 0.4s ease; 
+    border: 2px solid black;
 }
 
 .imagensdinamicas:hover{
@@ -14,13 +15,19 @@
 }
 
 .produtosDiv{
+    
     width: 55%;
-    background-color: black;
-    color: white;
+    
+   
     gap: 4%;
-    margin-left: 15%;
-    margin-right: 25%;
+    margin-left: 28%;
+    margin-right: 30%;
     margin-top: 10%;
+}
+
+
+.produtosDiv.img{
+    width: 100%;
 }
 
 .h1{

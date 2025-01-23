@@ -39,6 +39,7 @@ btn.addEventListener("click", async () => {
             produtoDiv.appendChild(nome);
             produtoDiv.classList.add("produtoDIv");
             produtosDiv.appendChild(produtoDiv);
+            produtosDiv.classList.add("produtosDiv");
 
             // Adiciona evento de clique para abrir o modal
             img.addEventListener("click", () => {
