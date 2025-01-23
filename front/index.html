@@ -7,22 +7,30 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    
-
     <input type="text" placeholder="Nome do produto" id="nome">
     <input type="text" placeholder="URL da imagem" id="img">
     <input type="button" id="cadastrar" value="Cadastrar">
 
     <input type="button" id="btn" value="Mostrar produtos cadastrados">
     
-    
     <div id="produtosmostrar">
-    <h1 class="h1">Todos produtos cadastrados</h1>    
-    <div id="produtos"></div>
+        <h1 class="h1">Todos produtos cadastrados</h1>    
+        <div id="produtos"></div>
     </div>
 
     <input type="button" value="Deletar produtos por id" id="deletar">
     <input type="text" placeholder="Digite o id do produto" id="id">
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modal-img" src="" alt="Imagem do produto">
+            <p id="modal-nome"></p>
+            <p id="modal-descricao"></p> <!-- Adicionado para exibir a descrição -->
+        </div>
+    </div>
+
     <script src="index.js"></script>
 </body>
 </html>

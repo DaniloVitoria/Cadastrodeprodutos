@@ -1,4 +1,5 @@
 import connection from '../config/config.js';
+import gerarDescricaoComGemini from '../service/service.js';
 
 //selecionando todos os produtos do banco
 connection.query('SELECT * FROM produtos', (error, results) =>{
@@ -22,18 +23,32 @@ async function cadastrarProduto(req, res) {
    let nome = req.body.nome;
    let img = req.body.img
     
+
+
+   try{
+    const descricao = await gerarDescricaoComGemini(img);
+
+
+
+
 //inserindo o produto dentro do banco de dados
- const query = 'INSERT INTO produtos (nome , img) VALUES (?, ?) ';
-    connection.query(query, [nome, img], (error, results) =>{
-        if(error){
-            console.error("Erro ao inserir produto" + error.message);
-            res.status(500).json({ "message": "Error ao guardar o produto"})
-            return
-        }
-        console.log("Produto guardado com sucesso", results)
-        res.status(200).json({ "message": "Produto guardado com sucesso"})
-        return;
-    })
+const query = 'INSERT INTO produtos (nome , img, descricao) VALUES (?, ?, ?) ';
+connection.query(query, [nome, img, descricao], (error, results) =>{
+    if(error){
+        console.error("Erro ao inserir produto" + error.message);
+        res.status(500).json({ "message": "Error ao guardar o produto"})
+        return
+    }
+    console.log("Produto guardado com sucesso", results)
+    res.status(200).json({ "message": "Produto guardado com sucesso"})
+    return;
+})
+
+   }catch(error){
+    console.error("Erro ao gerar descrição da imagem: " + error.message);
+    res.status(500).json({ "message": "Erro ao gerar descrição da imagem" });
+
+   }
 
 
 }
