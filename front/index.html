@@ -4,12 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link relstylesheet="style.css" href="index.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     
-    <input type="text"placeholder="Cadastro de produto" id="cadastro">
-    <p id="p"></p>
+
+    <input type="text" placeholder="Nome do produto" id="nome">
+    <input type="text" placeholder="URL da imagem" id="img">
+    <input type="button" id="cadastrar" value="Cadastrar">
+
+    <input type="button" id="btn" value="Mostrar produtos cadastrados">
+    
+    
+    <div id="produtosmostrar">
+    <h1 class="h1">Todos produtos cadastrados</h1>    
+    <div id="produtos"></div>
+    </div>
+
+    <input type="button" value="Deletar produtos por id" id="deletar">
+    <input type="text" placeholder="Digite o id do produto" id="id">
     <script src="index.js"></script>
 </body>
 </html>

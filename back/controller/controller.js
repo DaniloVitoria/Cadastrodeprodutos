@@ -6,23 +6,68 @@ connection.query('SELECT * FROM produtos', (error, results) =>{
         console.error(" Erro ao realizar a consulta"+ error.message)
         return
     }
-    console.log("produtos" + results)
+    console.log("produtos" + JSON.stringify(results));
+
+
 });
 
 
 
 
-let produtosC =[];
-let guardaremprodutos = []
+
+
 
 
 async function cadastrarProduto(req, res) {
-    let cadastro = req.body.cadastro;
-    let valor =  cadastro.toLowerCase();
-    produtosC.push(valor)
-    console.log("Produto guardado com sucesso", produtosC)
+   let nome = req.body.nome;
+   let img = req.body.img
+    
+//inserindo o produto dentro do banco de dados
+ const query = 'INSERT INTO produtos (nome , img) VALUES (?, ?) ';
+    connection.query(query, [nome, img], (error, results) =>{
+        if(error){
+            console.error("Erro ao inserir produto" + error.message);
+            res.status(500).json({ "message": "Error ao guardar o produto"})
+            return
+        }
+        console.log("Produto guardado com sucesso", results)
+        res.status(200).json({ "message": "Produto guardado com sucesso"})
+        return;
+    })
 
-    res.status(200).json({ "message": "Produto guardado com sucesso" })
+
 }
 
-export  {cadastrarProduto, produtosC}
+
+
+async function ProdutosC(req, res){
+    const query = 'SELECT * FROM produtos';
+    connection.query(query, (error, results) =>{
+        if(error){
+            console.error("Erro ao buscar produtos" + error.message);
+            res.status(500).json({ "message": "Erro ao buscar produtos"})
+            return
+        }
+        console.log("Prodtuso guardados com sucesso", results)
+        res.status(200).json(results)
+        return;
+    })
+}
+
+
+
+async function deletarproduto(req,res){
+    const id = req.params.id;
+    const query = "DELETE FROM produtos WHERE id = ? ";
+    connection.query(query, [id], (error, results)=>{
+        if(error){
+            console.error("Erro ao deletar produto: " + error.message);
+            res.status(500).json({ "message": "Erro ao deletar produto" });
+            return; 
+        }
+        console.log("Produto deletado com sucesso", results);
+        res.status(200).json({ "message": "Produto deletado com sucesso" });
+        return;
+    })
+}
+export  {cadastrarProduto, ProdutosC, deletarproduto}
